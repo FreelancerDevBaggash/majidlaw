@@ -1,0 +1,502 @@
+@import "tailwindcss";
+/* Removed problematic tw-animate-css import */
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated to navy blue and gold professional palette */
+  --background: oklch(0.98 0.005 240);
+  --foreground: oklch(0.15 0.02 240);
+  --card: oklch(0.99 0.003 240);
+  --card-foreground: oklch(0.15 0.02 240);
+  --popover: oklch(0.99 0.003 240);
+  --popover-foreground: oklch(0.15 0.02 240);
+
+  /* Navy blue as primary color - used sparingly for important elements */
+  --primary: oklch(0.25 0.08 240);
+  --primary-foreground: oklch(0.98 0.005 240);
+
+  /* Gold accent color for highlights and interactive elements */
+  --accent: oklch(0.75 0.15 85);
+  --accent-foreground: oklch(0.15 0.02 240);
+
+  --secondary: oklch(0.95 0.01 240);
+  --secondary-foreground: oklch(0.25 0.08 240);
+  --muted: oklch(0.96 0.008 240);
+  --muted-foreground: oklch(0.45 0.03 240);
+  --destructive: oklch(0.55 0.25 25);
+  --destructive-foreground: oklch(0.98 0.005 240);
+  --border: oklch(0.9 0.01 240);
+  --input: oklch(0.95 0.008 240);
+  --ring: oklch(0.25 0.08 240);
+
+  /* Chart colors using navy and gold variations */
+  --chart-1: oklch(0.25 0.08 240);
+  --chart-2: oklch(0.75 0.15 85);
+  --chart-3: oklch(0.35 0.06 240);
+  --chart-4: oklch(0.65 0.12 85);
+  --chart-5: oklch(0.45 0.04 240);
+
+  --radius: 0.625rem;
+  --sidebar: oklch(0.98 0.005 240);
+  --sidebar-foreground: oklch(0.15 0.02 240);
+  --sidebar-primary: oklch(0.25 0.08 240);
+  --sidebar-primary-foreground: oklch(0.98 0.005 240);
+  --sidebar-accent: oklch(0.95 0.01 240);
+  --sidebar-accent-foreground: oklch(0.25 0.08 240);
+  --sidebar-border: oklch(0.9 0.01 240);
+  --sidebar-ring: oklch(0.25 0.08 240);
+}
+
+.dark {
+  /* Dark mode with navy and gold theme maintaining high contrast */
+  --background: oklch(0.08 0.02 240);
+  --foreground: oklch(0.95 0.008 240);
+  --card: oklch(0.1 0.02 240);
+  --card-foreground: oklch(0.95 0.008 240);
+  --popover: oklch(0.1 0.02 240);
+  --popover-foreground: oklch(0.95 0.008 240);
+
+  /* Gold as primary in dark mode for better visibility */
+  --primary: oklch(0.75 0.15 85);
+  --primary-foreground: oklch(0.08 0.02 240);
+
+  /* Navy accent in dark mode */
+  --accent: oklch(0.35 0.08 240);
+  --accent-foreground: oklch(0.95 0.008 240);
+
+  --secondary: oklch(0.15 0.02 240);
+  --secondary-foreground: oklch(0.95 0.008 240);
+  --muted: oklch(0.12 0.02 240);
+  --muted-foreground: oklch(0.65 0.04 240);
+  --destructive: oklch(0.45 0.2 25);
+  --destructive-foreground: oklch(0.95 0.008 240);
+  --border: oklch(0.15 0.02 240);
+  --input: oklch(0.12 0.02 240);
+  --ring: oklch(0.75 0.15 85);
+
+  --chart-1: oklch(0.75 0.15 85);
+  --chart-2: oklch(0.35 0.08 240);
+  --chart-3: oklch(0.65 0.12 85);
+  --chart-4: oklch(0.45 0.06 240);
+  --chart-5: oklch(0.55 0.1 85);
+
+  --sidebar: oklch(0.08 0.02 240);
+  --sidebar-foreground: oklch(0.95 0.008 240);
+  --sidebar-primary: oklch(0.75 0.15 85);
+  --sidebar-primary-foreground: oklch(0.08 0.02 240);
+  --sidebar-accent: oklch(0.15 0.02 240);
+  --sidebar-accent-foreground: oklch(0.95 0.008 240);
+  --sidebar-border: oklch(0.15 0.02 240);
+  --sidebar-ring: oklch(0.75 0.15 85);
+}
+
+@theme inline {
+  /* Updated font variables to use new Google Fonts */
+  --font-sans: var(--font-inter);
+  --font-arabic: var(--font-amiri);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Added Arabic font support and improved mobile text rendering */
+    font-family: var(--font-arabic), var(--font-sans), system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Added better Arabic text support */
+  .font-arabic {
+    font-family: var(--font-arabic), system-ui, sans-serif;
+  }
+
+  .font-sans {
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-morphism-dark {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Added navy and gold gradient effects for interactive elements */
+  .navy-gold-gradient {
+    background: linear-gradient(135deg, oklch(0.25 0.08 240), oklch(0.75 0.15 85));
+  }
+
+  .navy-gold-gradient-hover {
+    background: linear-gradient(135deg, oklch(0.25 0.08 240), oklch(0.75 0.15 85));
+    transition: all 0.3s ease;
+  }
+
+  .navy-gold-gradient-hover:hover {
+    background: linear-gradient(135deg, oklch(0.35 0.1 240), oklch(0.85 0.18 85));
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 20px oklch(0.75 0.15 85 / 0.3);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .gold-glow:hover {
+    box-shadow: 0 0 30px oklch(0.75 0.15 85 / 0.5);
+  }
+
+  .navy-glow {
+    box-shadow: 0 0 20px oklch(0.25 0.08 240 / 0.3);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .navy-glow:hover {
+    box-shadow: 0 0 30px oklch(0.25 0.08 240 / 0.5);
+  }
+
+  .typing-animation {
+    overflow: hidden;
+    border-right: 2px solid;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Updated glow effects to use navy and gold colors */
+  .glow-effect {
+    box-shadow: 0 0 20px oklch(0.25 0.08 240 / 0.4);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-effect:hover {
+    box-shadow: 0 0 30px oklch(0.75 0.15 85 / 0.6);
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+
+  .card-3d:hover {
+    transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+  }
+
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .animated-counter {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Updated timeline line to use navy to gold gradient */
+  .timeline-line {
+    background: linear-gradient(to bottom, oklch(0.25 0.08 240), oklch(0.75 0.15 85));
+  }
+
+  .floating-label {
+    transition: all 0.3s ease;
+  }
+
+  /* Updated floating label active state to use navy color */
+  .floating-label.active {
+    transform: translateY(-20px) scale(0.8);
+    color: oklch(0.25 0.08 240);
+  }
+
+  .particle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* Updated particle color to use navy with gold accents */
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: oklch(0.25 0.08 240 / 0.3);
+    border-radius: 50%;
+    animation: particle-float 20s linear infinite;
+  }
+
+  .particle.gold {
+    background: oklch(0.75 0.15 85 / 0.3);
+  }
+
+  /* Updated scroll indicator to use navy to gold gradient */
+  .scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(to right, oklch(0.25 0.08 240), oklch(0.75 0.15 85));
+    z-index: 1000;
+    transition: width 0.3s ease;
+  }
+
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    animation: pulse 2s infinite;
+  }
+
+  /* Added professional button styles with navy and gold */
+  .btn-primary {
+    background: linear-gradient(135deg, oklch(0.25 0.08 240), oklch(0.35 0.1 240));
+    color: oklch(0.98 0.005 240);
+    border: 1px solid oklch(0.75 0.15 85 / 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, oklch(0.35 0.1 240), oklch(0.75 0.15 85));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px oklch(0.25 0.08 240 / 0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: oklch(0.25 0.08 240);
+    border: 2px solid oklch(0.25 0.08 240);
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background: oklch(0.25 0.08 240);
+    color: oklch(0.98 0.005 240);
+    box-shadow: 0 5px 15px oklch(0.25 0.08 240 / 0.3);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: currentColor;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Enhanced mobile responsiveness with better spacing and typography */
+@media (max-width: 768px) {
+  .card-3d:hover {
+    transform: translateY(-10px);
+  }
+
+  .typing-animation {
+    animation: typing 2s steps(30, end), blink-caret 0.75s step-end infinite;
+  }
+
+  /* Better mobile spacing */
+  .mobile-padding {
+    padding: 1rem;
+  }
+
+  .mobile-text-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .mobile-text-base {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .mobile-text-lg {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .mobile-text-xl {
+    font-size: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .mobile-text-2xl {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .mobile-text-3xl {
+    font-size: 1.875rem;
+    line-height: 1.3;
+  }
+
+  /* Better mobile button spacing */
+  .mobile-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-height: 44px; /* Touch-friendly size */
+  }
+
+  /* Mobile-optimized cards */
+  .mobile-card {
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+  }
+
+  /* Better mobile navigation */
+  .mobile-nav {
+    padding: 0.5rem 1rem;
+  }
+
+  /* Mobile-friendly forms */
+  .mobile-input {
+    padding: 0.875rem;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  /* Improved mobile hero section */
+  .mobile-hero {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .mobile-hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .mobile-hero p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small mobile devices */
+  .mobile-text-3xl {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .mobile-hero h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .mobile-padding {
+    padding: 0.75rem;
+  }
+
+  .mobile-card {
+    padding: 1rem;
+  }
+}

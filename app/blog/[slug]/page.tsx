@@ -1,0 +1,56 @@
+// app/blog/[slug]/page.tsx
+import { notFound } from "next/navigation"
+import { BlogPostContent } from "@/components/blog/blog-post-content"
+import { BlogComments } from "@/components/blog/blog-comments"
+import { getBlogPostBySlug, getBlogPosts } from "@/lib/blog-data"
+
+interface BlogPostPageProps {
+  params: {
+    slug: string
+  }
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  try {
+    const post = await getBlogPostBySlug(params.slug)
+
+    if (!post) {
+      notFound()
+    }
+
+    return (
+      <div className="min-h-screen bg-background">
+        <BlogPostContent post={post} />
+        <BlogComments postId={post._id} />
+      </div>
+    )
+  } catch (error) {
+    console.error('Error loading blog post:', error)
+    notFound()
+  }
+}
+
+// Static Generation مع Fallback
+export async function generateStaticParams() {
+  try {
+    // في production، يمكنك جلب المقالات المنشورة
+    if (process.env.NODE_ENV === 'production') {
+      const data = await getBlogPosts(1, 100)
+      return data.posts.map((post) => ({
+        slug: post.slug,
+      }))
+    }
+    
+    // في development، يمكنك استخدام بيانات ثابتة أو إرجاع مصفوفة فارغة
+    return []
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
+  }
+}
+
+// إعلام Next.js أن الصفحات غير المولدة ستتم معالجتها عند الطلب
+export const dynamicParams = true
+
+// إعادة التحقق كل ساعة (اختياري)
+export const revalidate = 3600
