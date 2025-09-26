@@ -39,9 +39,14 @@ export interface BlogPostResponse {
 }
 
 function createApiUrl(path: string): string {
-  // على العميل والـ SSR استخدم رابط نسبي
-  return `/api${path}`
+  if (typeof window !== "undefined") {
+    // على العميل
+    return `/api${path}`
+  }
+  // على السيرفر
+  return `${process.env.NEXT_PUBLIC_API_URL}/api${path}`
 }
+
 
 
 // جلب المقالات المنشورة مع دعم الوسوم
