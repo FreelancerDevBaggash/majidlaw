@@ -47,6 +47,10 @@ function createApiUrl(path: string): string {
   
   // في الخادم - استخدام عنوان مطلق
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+  
+   if (!baseUrl) {
+    throw new Error("NEXT_PUBLIC_APP_URL غير معرف في بيئة الخادم")
+  }
   return `${baseUrl}/api${path}`
 }
 
