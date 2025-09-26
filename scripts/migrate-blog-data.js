@@ -1,7 +1,7 @@
 // Script to migrate existing blog data to MongoDB
 const mongoose = require("mongoose")
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/lawyer-website"
+const MONGODB_URI = process.env.MONGODB_URI
 
 const BlogPostSchema = new mongoose.Schema(
   {

@@ -46,7 +46,7 @@ function createApiUrl(path: string): string {
   }
   
   // في الخادم - استخدام عنوان مطلق
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
   return `${baseUrl}/api${path}`
 }
 

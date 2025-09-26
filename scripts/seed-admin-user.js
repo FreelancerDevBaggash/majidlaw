@@ -2,7 +2,7 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcryptjs")
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/lawyer-website"
+const MONGODB_URI = process.env.MONGODB_URI
 
 const UserSchema = new mongoose.Schema(
   {
