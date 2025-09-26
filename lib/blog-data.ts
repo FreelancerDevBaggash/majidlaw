@@ -39,19 +39,8 @@ export interface BlogPostResponse {
 }
 
 function createApiUrl(path: string): string {
-  if (typeof window !== 'undefined') {
-    return `/api${path}`
-  }
-
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
-
-  if (!baseUrl) {
-    throw new Error(
-      "NEXT_PUBLIC_APP_URL غير معرف. تأكد من إضافته في إعدادات Vercel أو .env.local"
-    )
-  }
-
-  return `${baseUrl}/api${path}`
+  // على العميل والـ SSR استخدم رابط نسبي
+  return `/api${path}`
 }
 
 
