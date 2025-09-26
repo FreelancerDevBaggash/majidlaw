@@ -12,16 +12,16 @@ interface BlogPostPageProps {
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   try {
-    const post = await getBlogPostBySlug(params.slug)
+    const data = await getBlogPostBySlug(params.slug)
 
-    if (!post) {
+    if (!data) {
       notFound()
     }
 
     return (
       <div className="min-h-screen bg-background">
-        <BlogPostContent post={post} />
-        <BlogComments postId={post._id} />
+        <BlogPostContent post={data.post} />
+        <BlogComments postId={data.post._id} />
       </div>
     )
   } catch (error) {
