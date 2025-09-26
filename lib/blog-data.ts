@@ -38,21 +38,22 @@ export interface BlogPostResponse {
   relatedPosts: BlogPost[] // ✅ تمت الإضافة
 }
 
-// دالة مساعدة لإنشاء عنوان URL
 function createApiUrl(path: string): string {
   if (typeof window !== 'undefined') {
-    // في العميل - استخدام عنوان نسبي
     return `/api${path}`
   }
-  
-  // في الخادم - استخدام عنوان مطلق
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-  
-   if (!baseUrl) {
-    throw new Error("NEXT_PUBLIC_APP_URL غير معرف في بيئة الخادم")
+
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+
+  if (!baseUrl) {
+    throw new Error(
+      "NEXT_PUBLIC_APP_URL غير معرف. تأكد من إضافته في إعدادات Vercel أو .env.local"
+    )
   }
+
   return `${baseUrl}/api${path}`
 }
+
 
 // جلب المقالات المنشورة مع دعم الوسوم
 export async function getBlogPosts(
