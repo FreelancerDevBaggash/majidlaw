@@ -1,8 +1,12 @@
+// app/blog/page.tsx
 import { Suspense } from "react"
 import { BlogHeader } from "@/components/blog/blog-header"
-import { BlogGrid } from "@/components/blog/blog-grid"
 import { BlogSearch } from "@/components/blog/blog-search"
 import { BlogCategories } from "@/components/blog/blog-categories"
+import BlogGrid from "@/components/blog/blog-grid";
+
+// إخبار Next.js بأن الصفحة ديناميكية
+export const dynamic = "force-dynamic";
 
 export default function BlogPage() {
   return (

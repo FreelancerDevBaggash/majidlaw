@@ -5,10 +5,13 @@ import { BlogComments } from "@/components/blog/blog-comments"
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/blog-data"
 
 interface BlogPostPageProps {
-  params: {
-    slug: string
-  }
+  params: { slug: string }
 }
+
+// ديناميكية حسب كل طلب
+export const dynamic = "force-dynamic"
+export const dynamicParams = true
+export const revalidate = 3600 // إعادة التحقق كل ساعة
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   try {
@@ -30,27 +33,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 }
 
-// Static Generation مع Fallback
+// جلب بعض الـ slugs مسبقاً (اختياري)
 export async function generateStaticParams() {
+  if (process.env.NODE_ENV !== 'production') return []
+
   try {
-    // في production، يمكنك جلب المقالات المنشورة
-    if (process.env.NODE_ENV === 'production') {
-      const data = await getBlogPosts(1, 100)
-      return data.posts.map((post) => ({
-        slug: post.slug,
-      }))
-    }
-    
-    // في development، يمكنك استخدام بيانات ثابتة أو إرجاع مصفوفة فارغة
-    return []
+    const data = await getBlogPosts(1, 100)
+    return data.posts.map(post => ({ slug: post.slug }))
   } catch (error) {
     console.error('Error generating static params:', error)
     return []
   }
 }
-
-// إعلام Next.js أن الصفحات غير المولدة ستتم معالجتها عند الطلب
-export const dynamicParams = true
-
-// إعادة التحقق كل ساعة (اختياري)
-export const revalidate = 3600
