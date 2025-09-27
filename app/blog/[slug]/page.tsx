@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { BlogPostContent } from "@/components/blog/blog-post-content"
 import { BlogComments } from "@/components/blog/blog-comments"
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/blog-data"
+export const dynamic = "force-dynamic";
 
 interface BlogPostPageProps {
   params: {

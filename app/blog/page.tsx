@@ -3,6 +3,7 @@ import { BlogHeader } from "@/components/blog/blog-header"
 import { BlogGrid } from "@/components/blog/blog-grid"
 import { BlogSearch } from "@/components/blog/blog-search"
 import { BlogCategories } from "@/components/blog/blog-categories"
+export const dynamic = "force-dynamic";
 
 export default function BlogPage() {
   return (
