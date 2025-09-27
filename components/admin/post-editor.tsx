@@ -18,6 +18,7 @@ import { adminAuth } from "@/lib/admin-auth" // استدعاء مكتبة الج
 import { UploadButton } from "@uploadthing/react";
 import type { OurFileRouter } from "@/lib/uploadthing";
 import ImageUploader from "../imageUploader"
+import { IBlogPost } from "@/models/BlogPost"
 
 interface BlogCategory {
   slug: string
@@ -52,6 +53,10 @@ interface BlogPost {
   updatedAt?: string
   __v?: number
 }
+interface PostEditorProps {
+  post?: IBlogPost | null
+}
+
 
 export default function AddPostPage() {
   const router = useRouter()
